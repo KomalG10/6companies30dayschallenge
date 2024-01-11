@@ -1,0 +1,26 @@
+//Number of peaople aware  of secret
+
+class Solution {
+public:
+    int peopleAwareOfSecret(int n, int delay, int forget) {
+        vector<long int> dp(2001,0);
+        int mod = 100000000007;
+        dp[1]=1;
+        for(int i=1;i<=n;i++)
+        {
+            for(int j = i +delay ;j<i+forget;j++)
+            {
+                dp[j] = (dp[j]+dp[i])%mod;
+            }
+        }
+        int i=0;
+        long long int ans =0;
+        while(forget--)
+        {
+            ans = (ans + dp[n-i])%mod;
+            i++;
+        }
+
+        return ans;
+    }
+};
